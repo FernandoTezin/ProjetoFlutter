@@ -1,4 +1,3 @@
-
 import 'package:flut2/app/database/script.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -9,8 +8,8 @@ class Connection {
 
   static Future<Database?> get() async {
     if (_db == null) {
-      var path = join(await getDatabasesPath(), 'banco_contatos');
-      _db ??= await openDatabase(path, version: 1, onCreate: (db, version) {
+      var path = join(await getDatabasesPath(), 'banco');
+      _db = await openDatabase(path, version: 1, onCreate: (db, version) {
         db.execute(createTable);
         db.execute(insert);
         db.execute(insert2);
