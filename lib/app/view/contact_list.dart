@@ -4,27 +4,13 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:flut2/app/database/script.dart';
 
+import '../database/sqlite/connection.dart';
+
 class ContactList extends StatelessWidget {
-  final lista = [
-    {
-      'nome': 'Pietro',
-      'telefone': '(11) 9 9874-5656,',
-      'avatar':
-          'https://cdn.pixabay.com/photo/2017/01/31/21/22/avatar-2027363_1280.png'
-    }, //não usei os mesmos avatares, acredito que não tem problema
-    {
-      'nome': 'Maitê',
-      'telefone': '(11) 9 9632-8578,',
-      'avatar':
-          'https://cdn.pixabay.com/photo/2017/01/31/21/23/avatar-2027366_1280.png'
-    },
-    {
-      'nome': 'Hortência',
-      'telefone': '(11) 9 9562-3356,',
-      'avatar':
-          'https://cdn.pixabay.com/photo/2014/04/02/14/10/female-306407_1280.png'
-    },
-  ];
+  Future<List<Map<String, dynamic>>> _buscar() async {
+    Database? db = await Connection.get();
+    return db!.query('contact');
+  }
 
   @override
   Widget build(BuildContext context) {
