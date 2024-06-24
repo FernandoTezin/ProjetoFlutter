@@ -23,10 +23,10 @@ class ContactDAOImpl implements ContactDAO {
       var row = list[i];
       return Contact(
           id: row['id'],
-          name: row['name'],
-          phone: row['phone'],
+          nome: row['name'],
+          telefone: row['phone'],
           email: row['email'],
-          avatar: row['avatar']);
+          url_avatar: row['avatar']);
     });
     return contacts;
   }
@@ -38,16 +38,16 @@ class ContactDAOImpl implements ContactDAO {
     if (contact.id == null) {
       sql =
           'INSERT INTO contact (name, phone, email, avatar) VALUES (?, ?, ?, ?)';
-      _db!.rawInsert(
-          sql, [contact.name, contact.phone, contact.email, contact.avatar]);
+      _db!.rawInsert(sql,
+          [contact.nome, contact.telefone, contact.email, contact.url_avatar]);
     } else {
       sql =
           'UPDATE contact SET name = ?, phone = ?, email = ?, avatar = ? WHERE id = ?';
       _db!.rawUpdate(sql, [
-        contact.name,
-        contact.phone,
+        contact.nome,
+        contact.telefone,
         contact.email,
-        contact.avatar,
+        contact.url_avatar,
         contact.id
       ]);
     }

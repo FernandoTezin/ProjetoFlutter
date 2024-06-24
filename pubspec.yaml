@@ -33,7 +33,7 @@ dependencies:
   sqflite:
   get_it:
   path:
-  mobx:
+  mobx: 2.3.3+2
   flutter_mobx:
 
 

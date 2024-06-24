@@ -8,9 +8,9 @@ class ContactService {
   final _dao = GetIt.I.get<ContactDAO>();
 
   saveContact(Contact contact) {
-    validateNome(contact.nome);
-    validateEmail(contact.email);
-    validateTelefone(contact.telefone);
+    validarNome(contact.nome);
+    validarEmail(contact.email);
+    validarTelefone(contact.telefone);
     _dao.saveContact(contact);
   }
 
@@ -18,11 +18,11 @@ class ContactService {
     _dao.deleteContact(id);
   }
 
-  Future<List<Contact>> getContact() {
+  Future<List<Contact>> find() {
     return _dao.getContact();
   }
 
-  validateNome(String nome) {
+  validarNome(String nome) {
     var min = 3;
     var max = 50;
 
@@ -35,7 +35,7 @@ class ContactService {
     }
   }
 
-  validateEmail(String email) {
+  validarEmail(String email) {
     if (email == null) {
       throw DomainException('Email é obrigatório.');
     } else if (!email.contains('@')) {
@@ -43,7 +43,7 @@ class ContactService {
     }
   }
 
-  validateTelefone(String telefone) {
+  validarTelefone(String telefone) {
     var format = RegExp(r'^\([1-9]{2}\) [9]{0,1}[6-9]{1}[0-9]{3}-[0-9]{4}$');
     if (telefone == null) {
       throw DomainException('Telefone é obrigatório.');

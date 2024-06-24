@@ -1,14 +1,14 @@
 class Contact {
   int id;
-  String name;
+  String nome;
   String email;
-  String phone;
-  String avatar;
+  String telefone;
+  String url_avatar;
 
   Contact(
       {required this.id,
-      required this.name,
+      required this.nome,
       required this.email,
-      required this.phone,
-      required this.avatar});
+      required this.telefone,
+      required this.url_avatar});
 }

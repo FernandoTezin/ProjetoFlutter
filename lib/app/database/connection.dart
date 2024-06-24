@@ -1,4 +1,4 @@
-import 'package:agenda_flutter/app/database/database.dart';
+import 'package:agenda_flutter/app/database/script.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -8,6 +8,7 @@ class Connection {
   static Future<Database> get() async {
     if (_db == null) {
       var path = join(await getDatabasesPath(), 'database.db');
+      deleteDatabase(path);
       _db = await openDatabase(
         path,
         version: 1,

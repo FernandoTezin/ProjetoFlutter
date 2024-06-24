@@ -1,6 +1,6 @@
 final createTable = '''
 CREATE TABLE contact (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
   name VARCHAR(200) NOT NULL,
   phone CHAR(16) NOT NULL,
   email VARCHAR(150) NOT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE contact (
 
 final insert = '''
 INSERT INTO contact (name, phone, email, avatar)
-VALUES ('João', '123456789', 'joao@gmail.com', 'https://cdn.pixabay.com/photo/2013/07/13/12/07/avatar-159236_1280.png')
+VALUES ('Antonio', '123456789', 'antonio@gmail.com', 'https://cdn.pixabay.com/photo/2013/07/13/12/07/avatar-159236_1280.png')
 ''';
 
 final insert2 = '''
