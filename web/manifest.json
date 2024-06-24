@@ -1,6 +1,6 @@
 {
-    "name": "flut2",
-    "short_name": "flut2",
+    "name": "agenda_flutter",
+    "short_name": "agenda_flutter",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

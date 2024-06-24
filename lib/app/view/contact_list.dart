@@ -1,58 +1,64 @@
-import 'package:flut2/app/database/sqlite/dao/contact_dao_impl.dart';
-import 'package:flut2/app/domain/entities/contact.dart';
-import 'package:flut2/app/my_app.dart';
+import '../app.dart';
 import 'package:flutter/material.dart';
+import '../database/dao/contact_dao_impl.dart';
+import '../domain/entities/contact.dart';
 
 class ContactList extends StatelessWidget {
-  Future<List<Contact>> _buscar() async {
-    return ContactDAOImpl().find();
+  const ContactList({super.key});
+
+  Future<List<Contact>> _findContact() async {
+    return ContactDAOImpl().getContact();
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: _buscar(),
-        builder: (context, futuro) {
-          if (futuro.hasData) {
-            List<Contact>? lista = futuro.data;
-            return Scaffold(
-                appBar: AppBar(
-                  title: Text('Lista de Contatos'),
-                  actions: [
-                    IconButton(
-                        icon: Icon(Icons.add),
-                        onPressed: () {
-                          Navigator.of(context).pushNamed(MyApp.CONTACT_FORM);
-                        })
-                  ],
-                ),
-                body: ListView.builder(
-                  itemCount: lista!.length,
-                  itemBuilder: (context, i) {
-                    var contato = lista[i];
-                    var avatar = CircleAvatar(
-                      backgroundImage: NetworkImage(contato.urlAvatar),
-                    );
-                    return ListTile(
-                      leading: avatar,
-                      title: Text(contato.nome),
-                      subtitle: Text(contato.telefone),
-                      trailing: Container(
-                        width: 100,
-                        child: Row(
-                          children: [
-                            IconButton(icon: Icon(Icons.edit), onPressed: null),
-                            IconButton(
-                                icon: Icon(Icons.delete), onPressed: null),
-                          ],
-                        ),
-                      ),
-                    );
+      future: _findContact(),
+      builder: (context, future) {
+        if (future.hasData) {
+          List<Contact> list = future.data!;
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text('Lista de Contato'),
+              actions: [
+                IconButton(
+                  icon: const Icon(Icons.add),
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(App.contactForm);
                   },
-                ));
-          } else {
-            return Scaffold();
-          }
-        });
+                )
+              ],
+            ),
+            body: ListView.builder(
+              itemCount: list.length,
+              itemBuilder: (context, i) {
+                var contact = list[i];
+                var avatar = CircleAvatar(
+                  backgroundImage: NetworkImage(contact.url_avatar),
+                );
+                return ListTile(
+                  leading: avatar,
+                  title: Text(contact.nome),
+                  subtitle: Text(
+                    contact.telefone + '\n' + contact.email,
+                  ),
+                  trailing: Container(
+                    width: 100,
+                    child: Row(
+                      children: const [
+                        IconButton(icon: Icon(Icons.edit), onPressed: null),
+                        IconButton(icon: Icon(Icons.delete), onPressed: null),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+          );
+        } else {
+          return Scaffold();
+        }
+      },
+    );
   }
 }

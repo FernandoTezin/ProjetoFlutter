@@ -1,8 +1,8 @@
+import 'package:agenda_flutter/injection.dart';
 import 'package:flutter/material.dart';
-
-import 'app/my_app.dart';
+import 'app/app.dart';
 
 void main() {
-  runApp(MyApp());
+  setupInjection();
+  runApp(const App());
 }
-//opa
