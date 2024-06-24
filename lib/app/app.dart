@@ -17,7 +17,7 @@ class App extends StatelessWidget {
       ),
       routes: {
         home: (context) => ContactList(),
-        contactForm: (context) => const ContactForm(),
+        contactForm: (context) => ContactForm(),
       },
     );
   }
