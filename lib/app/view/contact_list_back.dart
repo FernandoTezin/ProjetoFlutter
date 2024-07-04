@@ -23,6 +23,10 @@ abstract class _ContactListBack with Store {
     refreshList();
   }
 
+  goToDetails(BuildContext context) {
+    Navigator.of(context).pushNamed(App.contact_details);
+  }
+
   goToForm(BuildContext context, [Contact? contact]) {
     Navigator.of(context)
         .pushNamed(App.contactForm, arguments: contact)

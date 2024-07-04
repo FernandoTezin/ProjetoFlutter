@@ -74,6 +74,9 @@ class ContactList extends StatelessWidget {
                     var contact = list[i];
                     return ListTile(
                       leading: circleAvatar(contact.url_avatar!),
+                      onTap: () {
+                        _back.goToDetails(context);
+                      },
                       title: Text(contact.nome!),
                       subtitle: Text(
                         contact.telefone! + '\n' + contact.email!,
