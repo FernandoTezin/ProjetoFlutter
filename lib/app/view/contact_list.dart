@@ -1,6 +1,5 @@
 import 'package:agenda_flutter/app/view/contact_list_back.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import '../app.dart';
 import 'package:flutter/material.dart';
 import '../domain/entities/contact.dart';
 
@@ -56,7 +55,7 @@ class ContactList extends StatelessWidget {
             IconButton(
               icon: const Icon(Icons.add),
               onPressed: () {
-                Navigator.of(context).pushNamed(App.contactForm);
+                _back.goToForm(context);
               },
             )
           ],
@@ -74,10 +73,10 @@ class ContactList extends StatelessWidget {
                   itemBuilder: (context, i) {
                     var contact = list[i];
                     return ListTile(
-                      leading: circleAvatar(contact.url_avatar),
-                      title: Text(contact.nome),
+                      leading: circleAvatar(contact.url_avatar!),
+                      title: Text(contact.nome!),
                       subtitle: Text(
-                        contact.telefone + '\n' + contact.email,
+                        contact.telefone! + '\n' + contact.email!,
                       ),
                       trailing: Container(
                         width: 100,
@@ -87,7 +86,7 @@ class ContactList extends StatelessWidget {
                               _back.goToForm(context, contact);
                             }),
                             IconDeleteButton(context, () {
-                              _back.remove(contact.id);
+                              _back.remove(contact.id!);
                               Navigator.of(context).pop();
                             })
                           ],

@@ -8,9 +8,9 @@ class ContactService {
   final _dao = GetIt.I.get<ContactDAO>();
 
   saveContact(Contact contact) {
-    validarNome(contact.nome);
-    validarEmail(contact.email);
-    validarTelefone(contact.telefone);
+    validarNome(contact.nome!);
+    validarEmail(contact.email!);
+    validarTelefone(contact.telefone!);
     _dao.saveContact(contact);
   }
 
@@ -32,6 +32,8 @@ class ContactService {
       throw DomainException('Nome deve ter pelo menos $min caracteres.');
     } else if (nome.length > max) {
       throw DomainException('Nome deve ter no máximo $max caracteres.');
+    } else {
+      return nome;
     }
   }
 
@@ -40,15 +42,16 @@ class ContactService {
       throw DomainException('Email é obrigatório.');
     } else if (!email.contains('@')) {
       throw DomainException('Email inválido.');
+    } else {
+      return email;
     }
   }
 
   validarTelefone(String telefone) {
-    var format = RegExp(r'^\([1-9]{2}\) [9]{0,1}[6-9]{1}[0-9]{3}-[0-9]{4}$');
     if (telefone == null) {
       throw DomainException('Telefone é obrigatório.');
-    } else if (!format.hasMatch(telefone)) {
-      throw DomainException('Telefone inválido.');
+    } else {
+      return telefone;
     }
   }
 }
